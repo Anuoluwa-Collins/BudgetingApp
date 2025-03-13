@@ -10,7 +10,6 @@ import {
 
 const Sidebar = () => {
   const [selectedPage, setSelectedPage] = useState("dashboard"); // Default selected page
-
   const menuItems = [
     {
       id: "dashboard",
@@ -33,7 +32,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="flex flex-col h-screen bg-teal-900 text-white fixed w-1/4 p-4">
+    <div className="flex flex-col h-screen bg-teal-900 text-white w-full md:w-full p-4 overflow-y-auto">
       <Link to="/" className="no-underline text-white">
         <div className="flex items-center mb-6 px-2">
           <Home className="mr-2" size={24} />
