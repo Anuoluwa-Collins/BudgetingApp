@@ -1,6 +1,6 @@
 import Sidebar from "../components/SideBar";
 import DashCards from "../components/DashCards";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Coffee,
   DollarSign,
@@ -16,13 +16,37 @@ import {
 
 const DashBoard = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if the viewport is mobile size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+      // Always show sidebar on desktop
+      if (window.innerWidth >= 768) {
+        setShowSidebar(true);
+      } else {
+        // On initial mobile load, hide sidebar
+        setShowSidebar(false);
+      }
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
   return (
-    <div className="flex flex-col md:flex-row relative">
+    <div className="flex flex-col md:flex-row min-h-screen relative">
       {/* Mobile menu toggle */}
       <div className="md:hidden fixed top-4 left-4 z-20">
         <button
@@ -33,19 +57,18 @@ const DashBoard = () => {
         </button>
       </div>
 
-      {/* Sidebar - hidden on mobile by default, shown when toggled */}
+      {/* Sidebar container */}
       <div
-        className={`${
-          showSidebar ? "block" : "hidden"
-        } md:block fixed md:static  md:w-1/4 z-10 h-screen bg-white md:bg-transparent`}
+        className={`fixed md:sticky top-0 left-0 h-full bg-white shadow-lg md:shadow-none transform ${
+          showSidebar ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 transition-transform duration-300 ease-in-out w-64 md:w-1/4 z-10`}
       >
         <Sidebar />
       </div>
 
       {/* Main content */}
-      <div className="w-full md:w-3/4 p-4 md:p-6 mt-12 md:mt-0">
-        <div className="mb-6">
-          
+      <div className="flex-1 p-4 md:p-6 w-full">
+        <div className="mb-6 mt-12 md:mt-0">
           <h1 className="text-2xl font-bold">This Month</h1>
         </div>
 
@@ -133,6 +156,14 @@ const DashBoard = () => {
           </div>
         </div>
       </div>
+
+      {/* Overlay for mobile when sidebar is open */}
+      {isMobile && showSidebar && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-0"
+          onClick={toggleSidebar}
+        />
+      )}
     </div>
   );
 };
