@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import {
   Home,
@@ -8,42 +9,68 @@ import {
 } from "lucide-react";
 
 const Sidebar = () => {
+  const [selectedPage, setSelectedPage] = useState("dashboard"); // Default selected page
+
+  const menuItems = [
+    {
+      id: "dashboard",
+      icon: <LayoutDashboard size={20} />,
+      label: "Dashboard",
+      path: "/dashboard",
+    },
+    {
+      id: "calendar",
+      icon: <Calendar size={20} />,
+      label: "Calendar",
+      path: "/Calender",
+    },
+    {
+      id: "calculator",
+      icon: <Calculator size={20} />,
+      label: "Calculator",
+      path: "/calculator",
+    },
+  ];
+
   return (
-    <div className=" bg-gray-900 text-white p-12 flex flex-col gap-6 ">
-      {/* Logo */}
-      <Link to="/" className="flex items-center gap-2 text-xl font-bold">
-        <Home size={24} /> Future Edge
+    <div className="flex flex-col h-screen bg-teal-900 text-white fixed w-1/4 p-4">
+      <Link to="/" className="no-underline text-white">
+        <div className="flex items-center mb-6 px-2">
+          <Home className="mr-2" size={24} />
+          <h1 className="text-xl font-bold">Budgeter</h1>
+        </div>
       </Link>
 
-      {/* Navigation Links */}
-      <nav className="flex flex-col gap-4">
-        <Link
-          to="/Dashboard"
-          className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
-        >
-          <LayoutDashboard size={20} /> Dashboard
-        </Link>
-        <Link
-          to="/Calender"
-          className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
-        >
-          <Calendar size={20} /> Calendar
-        </Link>
-        <Link
-          to="/Calculator"
-          className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md"
-        >
-          <Calculator size={20} /> Calculator
-        </Link>
-      </nav>
+      <div className="flex-1">
+        <nav>
+          <ul className="space-y-2">
+            {menuItems.map((item) => (
+              <li key={item.id}>
+                <Link
+                  to={item.path}
+                  className={`flex items-center p-2 rounded-md transition-colors ${
+                    selectedPage === item.id
+                      ? "bg-green-800 text-white"
+                      : "text-gray-300 hover:bg-green-950"
+                  }`}
+                  onClick={() => setSelectedPage(item.id)}
+                >
+                  <span className="mr-3">{item.icon}</span>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
 
-      {/* Logout Button */}
-      <div className="mt-auto">
+      <div className="pt-4 border-t border-gray-700">
         <Link
           to="/"
-          className="flex items-center gap-2 p-2 bg-red-600 hover:bg-red-700 rounded-md"
+          className="flex items-center p-2 text-gray-300 rounded-md hover:bg-red-600 transition-colors"
         >
-          <LogOut size={20} /> Logout
+          <LogOut className="mr-3" size={20} />
+          Logout
         </Link>
       </div>
     </div>

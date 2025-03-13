@@ -1,5 +1,4 @@
-import  { useState } from "react";
-
+import { useState } from "react";
 
 const CalculatorForm = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +16,10 @@ const CalculatorForm = () => {
     otherDeductions: "",
     taxAllowance: "",
   });
+
+  const [showModal, setShowModal] = useState(false);
+  const [calculationResult, setCalculationResult] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,18 +47,40 @@ const CalculatorForm = () => {
     });
   };
 
+  const calculateSum = () => {
+    // Extract all numeric values from the form
+    const numericValues = [
+      parseFloat(formData.grossIncome) || 0,
+      parseFloat(formData.age) || 0,
+      parseFloat(formData.pensionContributions) || 0,
+      parseFloat(formData.otherDeductions) || 0,
+      parseFloat(formData.taxAllowance) || 0,
+    ];
+
+    // Sum all values and divide by 5
+    const sum = numericValues.reduce((acc, val) => acc + val, 0);
+    return sum / 5;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add calculation logic here
-    console.log(formData);
+    setIsLoading(true);
+
+    // Simulate 2-second calculation time
+    setTimeout(() => {
+      const result = calculateSum();
+      setCalculationResult(result);
+      setIsLoading(false);
+      setShowModal(true);
+    }, 2000);
   };
 
   return (
     <div className="max-w-md mx-auto p-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                  How much tax will I pay?
-                  <hr />
+          How much tax will I pay?
+          <hr />
         </h1>
         <p className="text-gray-600">Enter Your Details:</p>
       </div>
@@ -267,18 +292,64 @@ const CalculatorForm = () => {
             type="button"
             onClick={handleReset}
             className="flex-grow px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+            disabled={isLoading}
           >
             Reset
           </button>
-         
+
           <button
             type="submit"
-            className="flex-grow px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-950 transition-colors"
+            className={`flex-grow px-4 py-2 text-white rounded-md transition-colors flex items-center justify-center ${
+              isLoading ? "bg-green-600" : "bg-green-800 hover:bg-green-950"
+            }`}
+            disabled={isLoading}
           >
-            Calculate
+            {isLoading ? (
+              <>
+                <span className="animate-spin inline-block mr-2 h-4 w-4 border-t-2 border-r-2 border-white rounded-full"></span>
+                Calculating...
+              </>
+            ) : (
+              "Calculate"
+            )}
           </button>
         </div>
       </form>
+
+      {/* Bootstrap Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-semibold text-gray-800">
+                Calculation Result
+              </h3>
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="mb-4">
+              <p className="text-gray-700">
+                your spendable amount is:
+              </p>
+              <p className="text-2xl font-bold text-green-800 mt-2">
+                £{calculationResult.toFixed(2)}
+              </p>
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-950 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
