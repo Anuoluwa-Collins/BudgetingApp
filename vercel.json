@@ -7,23 +7,23 @@
         },
         {
             "src":"/Register",
-            "dest":"/"
+            "dest":"/Register"
         },
         {
             "src":"/calculator",
-            "dest":"/"
+            "dest":"/calculator"
         },
         {
             "src":"/Login",
-            "dest":"/"
+            "dest":"/Login"
         },
         {
             "src":"/calendar",
-            "dest":"/"
+            "dest":"/calendar"
         },
         {
-            "src":"dashboard",
-            "dest":"/"
+            "src":"/dashboard",
+            "dest":"/dashboard"
         }
 
 ]
