@@ -1,11 +1,10 @@
-import { HashRouter as BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter as HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Calculator from "./pages/Calculator";
-import Calender from "./pages/Calender";
+import Calendar from "./pages/Calendar";
 import Login from "./pages/Login";
 import DashBoard from "./pages/DashBoard";
-
 import NotFound from "./pages/NotFound";
 
 import "./App.css";
@@ -16,17 +15,17 @@ function App() {
   return (
     <>
       <MonthProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Register" element={<Register />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/calculator" element={<Calculator />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/calendar" element={<Calender />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/calendar" element={<Calendar />} />
             <Route path="/dashboard" element={<DashBoard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </MonthProvider>
     </>
   );
