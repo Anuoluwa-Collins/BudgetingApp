@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import Calculator from "./pages/calculator";
+import Calculator from "./pages/Calculator";
 import Calender from "./pages/Calender";
 import Login from "./pages/Login";
-import DashBoard from "./pages/dashboard";
+import DashBoard from "./pages/DashBoard";
 
 import NotFound from "./pages/NotFound";
 
