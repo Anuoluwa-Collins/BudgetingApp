@@ -13,7 +13,7 @@ const Login = () => {
       setIsLoading(false);
       // Normally we would navigate programmatically here after successful login
       // But since we're using Link component, we'll maintain that behavior
-      window.location.href = "/DashBoard";
+      window.location.href = "/dashboard";
     }, 2000);
   };
 
@@ -53,7 +53,6 @@ const Login = () => {
                 Logging in...
               </button>
             ) : (
-                
               <button
                 type="button"
                 className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
