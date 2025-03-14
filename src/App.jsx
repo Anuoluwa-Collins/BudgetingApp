@@ -1,4 +1,4 @@
-import { HashRouter as HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Calculator from "./pages/Calculator";
@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <MonthProvider>
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
@@ -25,7 +25,7 @@ function App() {
             <Route path="/dashboard" element={<DashBoard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </MonthProvider>
     </>
   );
