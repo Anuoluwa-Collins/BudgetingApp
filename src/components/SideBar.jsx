@@ -50,7 +50,7 @@ const Sidebar = () => {
       id: "calendar",
       icon: <Calendar size={20} />,
       label: "Calendar",
-      path: "/Calender", // Keeping the original spelling
+      path: "/calendar", // Keeping the original spelling
     },
     {
       id: "calculator",
