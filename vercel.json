@@ -2,30 +2,9 @@
     "routes" :[
 
         {
-            "src":"/",
-            "dest":"/"
-        },
-        {
-            "src":"/Register",
-            "dest":"/Register"
-        },
-        {
-            "src":"/calculator",
-            "dest":"/calculator"
-        },
-        {
-            "src":"/Login",
-            "dest":"/Login"
-        },
-        {
-            "src":"/calendar",
-            "dest":"/calendar"
-        },
-        {
-            "src":"/dashboard",
-            "dest":"/dashboard"
+            "src":"/(.*)",
+            "dest":"/index.html"
         }
-
 ]
 }
 
