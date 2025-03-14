@@ -18,8 +18,8 @@ const Sidebar = () => {
     const currentPath = location.pathname;
     if (currentPath === "/dashboard") {
       setSelectedPage("dashboard");
-    } else if (currentPath === "/Calender") {
-      setSelectedPage("calendar");
+    } else if (currentPath === "/calender") {
+      setSelectedPage("calender");
     } else if (currentPath === "/calculator") {
       setSelectedPage("calculator");
     }
@@ -50,7 +50,7 @@ const Sidebar = () => {
       id: "calendar",
       icon: <Calendar size={20} />,
       label: "Calendar",
-      path: "/calendar", // Keeping the original spelling
+      path: "/calendar",
     },
     {
       id: "calculator",

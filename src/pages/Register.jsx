@@ -13,7 +13,7 @@ const Register = () => {
       setIsLoading(false);
       // Normally we would register the user and then navigate
       // But since we're using Link component, we'll maintain that behavior
-      window.location.href = "/DashBoard";
+      window.location.href = "/dashboard";
     }, 2000);
   };
 
