@@ -17,7 +17,7 @@ const Hero = () => {
             experience.
           </p>
           <div className="flex flex-col sm:flex-row mt-6 gap-4 justify-center">
-            <Link to="/Register">
+            <Link to="/register">
             <button className="p-3 rounded bg-green-800 text-white hover:bg-green-900 transition">
               Get Started - It&apos;s Free
             </button>

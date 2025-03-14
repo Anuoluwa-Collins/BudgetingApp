@@ -13,7 +13,7 @@ const MiniNav = () => {
             </h1>
           </Link>
 
-            <Link to="/Login">
+            <Link to="/login">
               <button className="border-2 border-green-800 text-black rounded-md px-4 py-2">
                 Login
               </button>

@@ -8,11 +8,9 @@ const Register = () => {
   const handleRegister = () => {
     setIsLoading(true);
 
-    // Simulate a 2-second loading time
     setTimeout(() => {
       setIsLoading(false);
-      // Normally we would register the user and then navigate
-      // But since we're using Link component, we'll maintain that behavior
+      
       window.location.href = "/dashboard";
     }, 2000);
   };
